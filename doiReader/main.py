@@ -4,7 +4,7 @@ file=input("enter file name : ")
 fileOpener=open(file,"r")
 fileReader=fileOpener.read().strip("\n").split(',')
 csv_file=open("output.csv","w")
-csv_file.write("DOI,Title,Author(s),Date\n")
+csv_file.write("DOI Number,Title of Publication ,Author(s),Date of Publication\n")
 
 #loop through file
 for i in fileReader:
