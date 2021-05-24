@@ -4,7 +4,7 @@ file=input("enter file name : ")
 fileOpener=open(file,"r")
 fileReader=fileOpener.read().strip("\n").split(',')
 csv_file=open("output.csv","w")
-csv_file.write("DOI Number,Title of Publication ,Author(s),Date of Publication\n")
+csv_file.write("DOI Number, Title of Publication, Author(s), Date of Publication, Journal Name, \n")
 
 #loop through file
 for i in fileReader:
@@ -30,7 +30,7 @@ for i in fileReader:
     #print("author(s):",end="\n\t")
     for i in range(len(data['message']['author'])):
         name=data['message']['author'][i]['given'] + data['message']['author'][i]['family']
-        authors.append(name)
+        authors.append(name)       
 
     #print("\n\t".join(authors))
     authors=" ".join(authors)
@@ -49,5 +49,16 @@ for i in fileReader:
         date_issued=str(get_date_parts[0][2])+"-"+str(get_date_parts[0][1])+"-"+str(get_date_parts[0][0])
 
     csv_file.write(date_issued+"\n")
-    print("finished and wrote to csv file")
+    
+    #print journal name
+    journals=[]
+    for i in range(len(data['message']['container-title'])):
+        journalName=data['message']['container-title'][i]
+        journals.append(journalName)
+
+    journals=" ".join(journals)
+    csv_file.write(journals+",")
+
+
+print("finished and wrote to csv file")
   
