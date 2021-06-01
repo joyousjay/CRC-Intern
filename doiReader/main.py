@@ -4,7 +4,7 @@ file=input("enter file name : ")
 fileOpener=open(file,"r")
 fileReader=fileOpener.read().strip("\n").split(',')
 csv_file=open("output.csv","w")
-csv_file.write("DOI Number, Title of Publication, Author(s), Date of Publication, Journal Name, \n")
+csv_file.write("DOI Number, Title of Publication, Author(s), Date of Publication, Journal Name, Volume(Issue), \n")
 
 #loop through file
 for i in fileReader:
@@ -59,6 +59,24 @@ for i in fileReader:
     journals=" ".join(journals)
     csv_file.write(journals+",")
 
+    #volume + issue
+    volumes=[]
+    issues=[]
+    for i in range(len(data['message']['volume'])):
+        volumeNum=data['message']['volume'][i]
+        volumes.append(volumeNum)
+        for j in range(len(data['message']['issued']['issue'])):
+            issueNum=data['message']['issued']['issue'][j]
+            issues.append(issueNum)
+    
+
+    volumes="".join(volumes)
+    issues="".join(issues)
+    csv_file.write(volumes+ "(" + issues + ")"+",")
+    
+    #pages
+
+    
 
 print("finished and wrote to csv file")
   
