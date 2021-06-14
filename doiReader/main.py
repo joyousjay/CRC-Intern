@@ -59,22 +59,19 @@ for i in fileReader:
     journals=" ".join(journals)
     csv_file.write(journals+",")
 
-    #volume + issue
+    #volume 
     volumes=[]
-    issues=[]
-    for i in range(len(data['message']['volume'])):
+    
+    for i in range(len(data['message']['volume'])-1):
         volumeNum=data['message']['volume'][i]
         volumes.append(volumeNum)
-        for j in range(len(data['message']['issued']['issue'])):
-            issueNum=data['message']['issued']['issue'][j]
-            issues.append(issueNum)
+       
     
 
     volumes="".join(volumes)
-    issues="".join(issues)
-    csv_file.write(volumes+ "(" + issues + ")"+",")
+    csv_file.write(volumes)
     
-    #pages
+ 
 
     
 
